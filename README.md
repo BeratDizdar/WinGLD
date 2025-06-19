@@ -13,6 +13,7 @@ Winapi ile uğraşmadan OpenGL ile ilgilenmek istiyorsanız doğru depodasınız
 
 ## Örnek Kullanım
 
+### C
 ```c
 #include "WGLD/wgld.h"
 
@@ -37,5 +38,28 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE nop1, LPSTR nop2, int nCmdShow
     WinGL_Shutdown(wgld);
     return wgld->Windows.Msg.wParam;
 }
+```
 
+### C++
+```cpp
+#include "WGLD/wgld.h"
+
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE nop1, LPSTR nop2, int nCmdShow)
+{
+    WinGL_Device* wgld = WinGL_Init("OpenGL Window", 800, 600, TRUE, hInstance, nCmdShow);
+    WinGL_Mainloop(wgld, +[](){
+        static float color = 0.01f;
+        static int sign = 1;
+
+        glClearColor(color, 0.17f, 0.4f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        color += 0.01f * sign;
+        if (color > 1.0f || color < 0.0f) sign = -sign;
+
+        glFlush();
+    });
+    WinGL_Shutdown(wgld);
+    return wgld->Windows.Msg.wParam;
+}
 ```
