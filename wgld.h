@@ -6,6 +6,10 @@
 #include <gl/glu.h>
 #include <gl/gl.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct {
 
     struct {
@@ -37,5 +41,9 @@ void WinGL_Mainloop(WinGL_Device* wgld, WinGL_MainloopCallback mainloop);
 void WinGL_Shutdown(WinGL_Device* wgld);
 double WinGL_GetTime();
 float WinGL_GetDelta();
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
